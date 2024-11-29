@@ -11,7 +11,11 @@ public struct SpreadableMacro: ExtensionMacro {
         conformingTo protocols: [SwiftSyntax.TypeSyntax],
         in context: some SwiftSyntaxMacros.MacroExpansionContext
     ) throws -> [SwiftSyntax.ExtensionDeclSyntax] {
-        guard let structDecl = declaration.as(StructDeclSyntax.self) else { return [] }
+        guard let structDecl = declaration.as(StructDeclSyntax.self) else {
+            throw MacroExpansionErrorMessage(
+                "Spreading is only applicable on struct."
+            )
+        }
         let members = try extractStructMemberNames(from: structDecl)
         let isPublic = structDecl.modifiers.contains(where: { $0.name.tokenKind == .keyword(.public) })
         let memberAccessExpressions = members.map { memberName in
