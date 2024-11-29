@@ -13,6 +13,7 @@ public struct SpreadableMacro: ExtensionMacro {
     ) throws -> [SwiftSyntax.ExtensionDeclSyntax] {
         guard let structDecl = declaration.as(StructDeclSyntax.self) else { return [] }
         let members = try extractStructMemberNames(from: structDecl)
+        let isPublic = structDecl.modifiers.contains(where: { $0.name.tokenKind == .keyword(.public) })
         let memberAccessExpressions = members.map { memberName in
             LabeledExprSyntax(
                 leadingTrivia: memberName == members.first ? .newline : nil,
@@ -50,6 +51,7 @@ public struct SpreadableMacro: ExtensionMacro {
         
         return [
             ExtensionDeclSyntax(
+                modifiers: isPublic ? [.init(name: .keyword(.public))] : [],
                 extendedType: IdentifierTypeSyntax(name: .identifier(structDecl.name.text)),
                 inheritanceClause: nil,
                 memberBlock: .init(

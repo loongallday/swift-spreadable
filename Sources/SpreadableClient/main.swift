@@ -1,7 +1,7 @@
 import Spreadable
 
 @Spreadable
-struct Test {
+public struct Test {
     var a: String?
     var b: String?
 }
