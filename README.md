@@ -76,14 +76,14 @@ print(mutableInstance) // Example(a: "Hello", b: 42, c: 1.23, d: 3.14)
 
 Add SwiftSpreadable to your project using the Swift Package Manager (SPM):
 	1.	In Xcode, navigate to File > Add Packages.
-	2.	Enter the repository URL: https://github.com/your-username/swift-spreadable
+	2.	Enter the repository URL: https://github.com/loongallday/swift-spreadable.git
 	3.	Select the version and integrate the package into your project.
 
 Or add it manually in your Package.swift:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-username/swift-spreadable.git", from: "1.0.0")
+    .package(url: "https://github.com/loongallday/swift-spreadable.git", from: "1.0.0")
 ]
 ```
 
